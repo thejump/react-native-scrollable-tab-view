@@ -39,6 +39,52 @@ const DefaultTabBar = createReactClass({
     const { activeTextColor, inactiveTextColor, textStyle, } = this.props;
     const textColor = isTabActive ? activeTextColor : inactiveTextColor;
     const fontWeight = isTabActive ? 'bold' : 'normal';
+    let count, split = (name || "").split("^"), Badge,BadgeHidden,Inner,hiddenStyle,color
+    if (split.length > 1) {
+    color=split[1]
+      count = split[2]
+    }
+    if (count) {
+      //hidden is for centering purposes
+      let badgeStyle = {
+        height: 18,
+        backgroundColor:color,
+        borderRadius: 9,
+        alignItems: "center",
+        justifyContent: "center",
+        marginLeft:4,
+        marginBottom:16,
+      }
+      if ((count + "").length == 1) {
+        badgeStyle.width = 18
+        badgeStyle.paddingLeft=1
+      }
+      else{
+        badgeStyle.paddingHorizontal=4
+      }
+      hiddenStyle=JSON.parse(JSON.stringify(badgeStyle))
+      hiddenStyle.backgroundColor='white'
+      hiddenStyle.marginRight=4
+      hiddenStyle.marginLeft=0
+      Badge = <View style={badgeStyle}>
+        <Text style={{ color: "white", fontFamily: "AvenirNext-Medium", fontSize: 13 }}>{count}</Text>
+      </View>
+      BadgeHidden = <View style={hiddenStyle}>
+        <Text style={{ color: "white", fontFamily: "AvenirNext-Medium", fontSize: 13 }}>{count}</Text>
+      </View>
+      Inner=<View style={{flexDirection:'row',alignItems:'flex-end'}}>
+        {BadgeHidden}
+        <Text style={[{color: textColor, fontWeight}, textStyle ]}>
+          {split[0]}
+        </Text>
+        {Badge}
+      </View>
+    }
+    else{
+      Inner=  <Text style={[{color: textColor, fontWeight, }, textStyle, ]}>
+        {name}
+      </Text>
+    }
 
     return <Button
       style={{flex: 1, }}
@@ -49,9 +95,7 @@ const DefaultTabBar = createReactClass({
       onPress={() => onPressHandler(page)}
     >
       <View style={[styles.tab, this.props.tabStyle, ]}>
-        <Text style={[{color: textColor, fontWeight, }, textStyle, ]}>
-          {name}
-        </Text>
+        {Inner}
       </View>
     </Button>;
   },

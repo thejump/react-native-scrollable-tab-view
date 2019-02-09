@@ -128,6 +128,7 @@ const ScrollableTabBar = createReactClass({
     const { activeTextColor, inactiveTextColor, textStyle } = this.props
     const textColor = isTabActive ? activeTextColor : inactiveTextColor
     const fontWeight = isTabActive ? "bold" : "normal"
+    alert('sf')
     let count, split = (name || "").split("^"), Badge,Inner
     if (split.length > 1) {
       count = split[1]

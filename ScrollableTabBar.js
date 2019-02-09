@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     borderLeftWidth: 0,
     borderRightWidth: 0,
-    borderColor: '#ccc',
+    borderColor: 'rgb(234,234,234)',
   },
   tabs: {
     flexDirection: 'row',

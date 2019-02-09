@@ -128,6 +128,19 @@ const ScrollableTabBar = createReactClass({
     const { activeTextColor, inactiveTextColor, textStyle, } = this.props;
     const textColor = isTabActive ? activeTextColor : inactiveTextColor;
     const fontWeight = isTabActive ? 'bold' : 'normal';
+let count,split=(name || '').split('^'),Badge
+    if(split.length>1){
+  count=split[1]
+    }
+    if(count){
+  let badgeStyle={height:18,backgroundColor:'rgb(232,54,42)',borderRadius:9,alignItems:'center',justifyContent:'center'}
+  if((count + '').length==1){
+    badgeStyle.width=18
+  }
+  Badge=<View style={badgeStyle}>
+    <Text style={{color:'white',fontFamily:'AvenirNext-Medium',fontSize:13}}>{count}</Text>
+  </View>
+    }
 
     return <Button
       key={`${name}_${page}`}
